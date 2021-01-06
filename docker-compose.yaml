@@ -1,0 +1,21 @@
+version: '3'
+
+services: 
+  pg:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: waffle
+    ports: 
+      - 5432:5432
+
+ crawler:
+    build: 
+      context: crawler
+    environment: 
+      MAX_PAGES: 130      # no more than 137
+      MAX_PER_PAGE: -1   # -1 to fetch all 
+    ports: 
+      - 6800:6800
