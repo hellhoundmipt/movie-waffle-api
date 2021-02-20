@@ -23,3 +23,20 @@ class MovieItem(scrapy.Item):
     metascore = scrapy.Field()
     user_score = scrapy.Field()
 
+    def to_dict(self):
+        return {
+            "url": self['url'],
+            "title": self['title'],
+            "year": self['year'],
+            "starring": self['starring'],
+            "summary": self['summary'],
+            "posterUrl": self['poster_url'],
+            "genres": self['genres'],
+            "directors": self['directors'],
+            "rating": self['rating'],
+            "runtime": self['runtime'],
+            "mymlUrls": self['myml_urls'],
+            "metascore": self['metascore'],
+            "userScore": self['user_score']
+        }
+
