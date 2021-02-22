@@ -1,12 +1,14 @@
-//#full-example
 package com.waffle
 
-import akka.actor.testkit.typed.scaladsl.ScalaTestWithActorTestKit
-import org.scalatest.wordspec.AnyWordSpecLike
+import akka.http.scaladsl.testkit.ScalatestRouteTest
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 
-//#definition
-class ApiSpec extends ScalaTestWithActorTestKit with AnyWordSpecLike {
-//#definition
+class ApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest {
+
+    "Data from crawlers" should {
+        "be uploaded successfully" in {
+        }
+    }
 
 }
-//#full-example
