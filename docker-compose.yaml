@@ -17,5 +17,6 @@ services:
     environment: 
       MAX_PAGES: 130      # no more than 137
       MAX_PER_PAGE: -1   # -1 to fetch all 
+      API_ADDRESS: api:5000/upload
     ports: 
       - 6800:6800
