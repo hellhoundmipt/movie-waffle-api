@@ -13,7 +13,7 @@ final case class Crawled(
     runtime: String,
     mymlUrls: Seq[String],
     metascore: String,
-    userScores: String
+    userScore: String
 )
 
 object CrawledJsonProtocol

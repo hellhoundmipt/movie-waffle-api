@@ -16,7 +16,7 @@ object UploadApi {
         (pathPrefix("upload") & post & extractLog & entity(asSourceOf[Crawled])) { (log, items) =>
             val itemsSubmitted = items.runFold(0){ (cnt, _) => cnt + 1 }
             complete(
-                itemsSubmitted.map(n => Map("msg" -> s"Total tings: $n"))
+                itemsSubmitted.map(n => s"Total tings: $n")
             )
         }   
     }
