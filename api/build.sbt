@@ -21,6 +21,11 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
 )
 
+// Slick 
+libraryDependencies ++=Seq(
+  "com.typesafe.slick" %% "slick" % "3.3.2"
+)
+
 // Alpakka
 libraryDependencies ++= Seq(
   "com.lightbend.akka" %% "akka-stream-alpakka-slick" % "2.0.2",

@@ -10,12 +10,14 @@ import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import com.waffle.upload.UploadApi
 import akka.actor.typed.DispatcherSelector
+import akka.stream.alpakka.slick.scaladsl.SlickSession
 
 object ApiMain extends App {
     val address = "localhost"
     val port = 8000
     implicit val system = ActorSystem(Behaviors.empty, "api-system")
     implicit val executionContext = system.executionContext
+    implicit val session: SlickSession = SlickSession.forConfig("slick-postgres")
 
     val baseRoute = (pathEndOrSingleSlash & get) {
         complete(StatusCodes.OK)
