@@ -9,6 +9,7 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import com.waffle.upload.UploadApi
+import akka.actor.typed.DispatcherSelector
 
 object ApiMain extends App {
     val address = "localhost"
@@ -16,11 +17,11 @@ object ApiMain extends App {
     implicit val system = ActorSystem(Behaviors.empty, "api-system")
     implicit val executionContext = system.executionContext
 
-    val route = (pathEndOrSingleSlash & get) {
+    val baseRoute = (pathEndOrSingleSlash & get) {
         complete(StatusCodes.OK)
     }
     
-    val upload = UploadApi.route()
+    val uploadRoute = UploadApi.route()(system, system.dispatchers.lookup(DispatcherSelector.fromConfig("stream-dispatcher")))
 
-    val bindingFuture = Http().newServerAt(address, port).bind(route ~ upload)
+    val bindingFuture = Http().newServerAt(address, port).bind(baseRoute ~ uploadRoute)
 }
