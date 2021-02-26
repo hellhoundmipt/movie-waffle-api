@@ -1,0 +1,15 @@
+{
+    "url": "https://www.metacritic.com/movie/taxi-driver-1976",
+    "title": "Taxi Driver",
+    "year": "1976",
+    "starring": ["Albert Brooks", "Cybill Shepherd", "Diahnne Abbott", "Frank Adu", "Garth Avery", "Gino Ardito", "Jodie Foster", "Peter Boyle", "Robert De Niro", "Victor Argo"],
+    "summary": ["Scorsese’s 1976 masterpiece is the all-too-real story of a psychotic New York cabby who is driven to violence in an attempt to rescue a teenage prostitute."],
+    "posterUrl": "https://static.metacritic.com/images/products/movies/1/06526a61907c3757688d1107a490fe64-250h.jpg",
+    "genres": ["Drama", "Thriller", "Crime"],
+    "directors": ["Martin Scorsese"],
+    "rating": "R",
+    "runtime": "114 min",
+    "mymlUrls": [],
+    "metascore": "94",
+    "userScore": "7.4"
+}

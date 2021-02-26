@@ -12,34 +12,34 @@ import com.waffle.upload.CrawledJsonProtocol._
 import spray.json._
 import akka.http.scaladsl.model.HttpEntity
 import akka.http.scaladsl.model.ContentTypes
+import scala.io.Source
+import org.scalatest.BeforeAndAfterEach
 
-class ApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest {
+class ApiSpec extends AnyWordSpec with Matchers with ScalatestRouteTest with BeforeAndAfterEach {
 
     val testKit = ActorTestKit()
     implicit val ac = testKit.internalSystem
 
     override def afterAll(): Unit = testKit.shutdownTestKit()
 
+    override protected def beforeEach(): Unit = {
+        println("Gonna clear db")
+    }
+
+    private def readFile(path: String): String = Source.fromURL(getClass().getResource(path)).getLines().mkString
+
     "Data from crawlers" should {
-        "be uploaded successfully" in {
-            val input = Crawled(
-                url = "http://huhu.com",
-                title = "Taxi Driver",
-                year = "1993",
-                starring = Seq("Robert De Niro"),
-                summary = Seq("On every street", "there's a nobody", "who dreams of being somebody"),
-                posterUrl = "Lel",
-                genres = Seq("drama"),
-                directors = Seq("Martin Scorcese"),
-                rating = "R",
-                runtime = "90:30",
-                mymlUrls = Seq(),
-                metascore = "10",
-                userScore = "10"
-            )
-            println(input.toJson)
-            Post("/upload").withEntity(HttpEntity(ContentTypes.`application/json`, input.toJson.compactPrint)) ~> UploadApi.route ~> check {
+        "be uploaded successfully for a single input" in {
+            val input = readFile("/taxi_driver.json")
+            Post("/upload").withEntity(HttpEntity(ContentTypes.`application/json`, input)) ~> UploadApi.route ~> check {
                 responseAs[String] shouldEqual "Total tings: 1"
+            }
+        }
+
+        "be uploaded successfully for an array input" in {
+            val input = readFile("/taxi_driver_and_solaris.json")
+            Post("/upload").withEntity(HttpEntity(ContentTypes.`application/json`, input)) ~> UploadApi.route ~> check {
+                responseAs[String] shouldEqual "Total tings: 2"
             }
         }
     }
