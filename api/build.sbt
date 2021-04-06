@@ -23,7 +23,9 @@ libraryDependencies ++= Seq(
 
 // Slick 
 libraryDependencies ++=Seq(
-  "com.typesafe.slick" %% "slick" % "3.3.2"
+  "com.typesafe.slick" %% "slick" % "3.3.2",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.2",
+  "org.postgresql" % "postgresql" % "42.2.5"
 )
 
 // Alpakka
